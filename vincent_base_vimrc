@@ -1,0 +1,254 @@
+" ########################################################################
+" vundle settingsa ,some settings is system settings
+" ########################################################################
+set nocompatible               " be iMproved
+filetype off                   " required!
+
+set rtp+=~/.vim/bundle/vundle/
+call vundle#rc()
+
+" let Vundle manage Vundle
+" required! 
+Bundle 'gmarik/vundle'
+
+" My Bundles here:
+"
+" original repos on github
+" Bundle 'tpope/vim-fugitive'
+" Bundle 'Lokaltog/vim-easymotion'
+" Bundle 'rstacruz/sparkup', {'rtp': 'vim/'}
+" Bundle 'tpope/vim-rails.git'
+" vim-scripts repos
+" FuzzyFinder required
+Bundle 'L9'
+Bundle 'FuzzyFinder'
+" non github repos
+" Bundle 'git://git.wincent.com/command-t.git'
+
+" Vimwiki
+Bundle 'vimwiki'
+" Powerline
+Bundle 'git://github.com/Lokaltog/vim-powerline.git'
+
+" python-mode
+Bundle 'klen/python-mode'
+" Calendar-vim
+Bundle 'mattn/calendar-vim'
+
+" #######################
+" colorscheme
+" #######################
+Bundle 'desert-warm-256'
+Bundle 'burnttoast256'
+Bundle 'Skittles-Berry'
+Bundle 'badwolf'
+Bundle 'Gummybears'
+" Bundle 'peaksea'
+colorscheme badwolf
+
+
+
+" ...
+
+filetype plugin indent on     " required!
+"
+" Brief help
+" :BundleList          - list configured bundles
+" :BundleInstall(!)    - install(update) bundles
+" :BundleSearch(!) foo - search(or refresh cache first) for foo
+" :BundleClean(!)      - confirm(or auto-approve) removal of unused bundles
+"
+" see :h vundle for more details or wiki for FAQ
+" NOTE: comments after Bundle command are not allowed..
+
+" makes Vundle use `git` instead default `https` when building absolute repo URIs
+let g:vundle_default_git_proto = 'git'
+
+" ########################################################################
+" vincent's settings
+" ########################################################################
+set nu              " number line
+set t_Co=256            " color
+
+set laststatus=2
+"set statusline=\ %{HasPaste()}%<%-15.25(%f%)%m%r%h\ %w\ \
+"set statusline+=\ \ \ [%{&ff}/%Y]
+"set statusline+=\ \ \ %<%20.30(%{hostname()}:%{CurDir()}%)\
+"set statusline+=%=%-10.(%l,%c%V%)\ %p%%/%L
+
+"function! CurDir()
+"    let curdir = substitute(getcwd(), $HOME, "~", "")
+"    return curdir
+"endfunction
+
+"function! HasPaste()
+"    if &paste
+"         return '[PASTE]'
+"    else
+"        return ''
+"    endif
+"endfunction
+
+filetype plugin on
+
+syntax enable
+syntax on
+
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+" do not keep a backup file, use versions instead
+set nobackup
+set nowritebackup
+set noswapfile 
+
+set mouse=a
+set history=50      " keep 50 lines of command line history
+
+set ruler       " show the cursor position all the time
+set showcmd     " display incomplete commands
+
+set autoread        " auto read when file is changed from outside
+" ignore these files while expanding wild chars
+set wildignore=*.o,*.class,*.pyc
+
+set autoindent      " auto indentation
+
+set smarttab        " insert tabs on the start of a line according to context
+
+
+
+set hlsearch              " 开启高亮显示结果
+set incsearch             " do incremental searching
+set ignorecase      " ignore case when searching
+set smartcase       " ignore case if search pattern is all lowercase,case-sensitive otherwise
+
+" disable sound on errors
+set noerrorbells
+set novisualbell
+set t_vb=
+set tm=500
+
+
+" swap temp file ,it's no need when you set noswapfile
+set directory=~/tmp,/tmp
+
+" 设置缩进
+set et
+set ts=4
+set sw=4
+"自动切换到当前工作目录
+set autochdir
+
+
+"Fast reloading of the .vimrc
+map <silent> <leader>ss :source ~/.vimrc<cr>
+"Fast editing of .vimrc
+map <silent> <leader>ee :e ~/.vimrc<cr>
+" auto reload .vimrc
+" auto reload .vimrc
+autocmd! bufwritepost .vimrc so ~/.vimrc
+
+
+" powerline{
+set guifont=PowerlineSymbols\ for\ Powerline
+let g:Powerline_symbols='fancy'         "'fancy'
+set fillchars+=stl:\ ,stlnc:\
+"}
+
+
+" ########################################################################
+" some useful keymap for wiki and datetime
+" ########################################################################
+" 插入最后修改的时间
+map <C-I>d  <Esc>1ggO<Esc>d0i<span class="author">王超</span>最后修改:<span class="update_date"><C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR></span>
+" 在底部插入页面标题
+map <C-I>t  <Esc>Go<Esc>d0i%title t - 王超.wiki<Esc>10hs
+" 在当前位置插入一段高亮代码块的代码
+map <C-I>c  <Esc>o{{{class="brush:bash;class-name:'code_class_highlighter'"<cr><cr>}}}<Esc>ki
+" 插入日期的3种格式
+map <Leader>d1 <Esc>a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+map <Leader>d2 <Esc>a<C-R>=strftime("%Y-%m-%d")<CR>
+map <Leader>d3 <Esc>a<C-R>=strftime("%H:%M:%S")<CR>
+
+" ########################################################################
+" vimwiki的配置
+" ########################################################################
+let g:vimwiki_list=[{'path': '$HOME/Dropbox/dev/workspace/vimwiki/01/wiki/',
+    \'path_html':'$HOME/Dropbox/dev/workspace/vimwiki/01/html/',
+    \ 'template_path': '$HOME/Dropbox/dev/workspace/vimwiki/01/templates/',
+    \ 'template_default': 'def_template',
+    \ 'template_ext': '.html',
+    \ 'diary_link_count': '4',
+    \ 'nested_syntaxes': {'python': 'python','ruby': 'ruby', 'js': 'javascript'},
+    \'auto_export':'0'},
+    \ {'path': '$HOME/Dropbox/dev/workspace/vimwiki/02/wiki/',
+    \'path_html':'$HOME/Dropbox/dev/workspace/vimwiki/02/html/',
+    \ 'template_path': '$HOME/Dropbox/dev/workspace/vimwiki/02/templates/',
+    \ 'template_default': 'def_template',
+    \ 'template_ext': '.html',
+    \ 'diary_link_count': '1',
+    \ 'nested_syntaxes': {'python': 'python','ruby': 'ruby', 'js': 'javascript'},
+    \'auto_export':'0'}]
+let g:vimwiki_camel_case = 0    " 关闭vimwiki的驼峰
+" 开放vimwiki的html标签
+let g:vimwiki_valid_html_tags='a,b,i,s,u,sub,sup,kbd,br,hr,div,span,script,del,code,red,center,left,right,h4,h5,h6,pre'
+" let g:vimwiki_browser = ['']
+map <F4> :Vimwiki2HTML<cr>
+" map <S-F4> :VimwikiAll2HTML<cr>                "生成wiki文档html全部
+map <F8> :Calendar<cr>          "打开日历
+
+
+" ########################################################################
+" python-mode
+" ########################################################################
+" Load the whole plugin
+" let g:pymode = 1
+" Load show documentation plugin
+let g:pymode_doc = 1
+" Key for show python documentation
+let g:pymode_doc_key = 'K'
+" Enable python folding
+let g:pymode_folding = 0
+let g:pymode_lint = 1
+
+
+
+" Enable pymode's custom syntax highlighting
+let g:pymode_syntax = 1
+
+" Enable all python highlightings
+let g:pymode_syntax_all = 1
+
+" Highlight "print" as function
+let g:pymode_syntax_print_as_function = 0
+
+" Highlight indentation errors
+let g:pymode_syntax_indent_errors = g:pymode_syntax_all
+
+" Highlight trailing spaces
+let g:pymode_syntax_space_errors = g:pymode_syntax_all
+
+" Highlight string formatting
+let g:pymode_syntax_string_formatting = g:pymode_syntax_all
+
+" Highlight str.format syntax
+let g:pymode_syntax_string_format = g:pymode_syntax_all
+
+" Highlight string.Template syntax
+let g:pymode_syntax_string_templates = g:pymode_syntax_all
+
+" Highlight doc-tests
+let g:pymode_syntax_doctests = g:pymode_syntax_all
+
+" Highlight builtin objects (__doc__, self, etc)
+let g:pymode_syntax_builtin_objs = g:pymode_syntax_all
+
+" Highlight builtin functions
+let g:pymode_syntax_builtin_funcs = g:pymode_syntax_all
+
+" Highlight exceptions
+let g:pymode_syntax_highlight_exceptions = g:pymode_syntax_all
+
+" For fast machines
+let g:pymode_syntax_slow_sync = 0
