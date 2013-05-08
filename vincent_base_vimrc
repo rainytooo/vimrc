@@ -1,6 +1,32 @@
-" ########################################################################
-" vundle settingsa ,some settings is system settings
-" ########################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Maintainer: 
+"       Vincent.wang
+"       http://xsudo.com wangchao.omg@gmail.com  or vincent@xsudo.com
+"
+" Version: 
+"       2.0 - 2013-05-09 00:19:46
+"
+" Sections:
+"    -> General
+"    -> vundle
+"
+" ChangeLog:
+"       2.0 - 2013-05-09
+"           * Use vundle management plugin
+"           * Save all vim config files on Dropbox including vimrc and vim folder
+"           * Save all vim config files on github 
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => vundle
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible               " be iMproved
 filetype off                   " required!
 
@@ -36,17 +62,13 @@ Bundle 'klen/python-mode'
 Bundle 'mattn/calendar-vim'
 
 " #######################
-" colorscheme
+" colorscheme bundle
 " #######################
 Bundle 'desert-warm-256'
 Bundle 'burnttoast256'
 Bundle 'Skittles-Berry'
 Bundle 'badwolf'
 Bundle 'Gummybears'
-" Bundle 'peaksea'
-colorscheme badwolf
-
-
 
 " ...
 
@@ -67,6 +89,11 @@ let g:vundle_default_git_proto = 'git'
 " ########################################################################
 " vincent's settings
 " ########################################################################
+colorscheme gummybears
+" Better copy & paste
+:set pastetoggle=<F2>
+
+
 set nu              " number line
 set t_Co=256            " color
 
