@@ -46,8 +46,8 @@ Bundle 'gmarik/vundle'
 " Bundle 'tpope/vim-rails.git'
 " vim-scripts repos
 " FuzzyFinder required
-Bundle 'L9'
-Bundle 'FuzzyFinder'
+" Bundle 'L9'
+" Bundle 'FuzzyFinder'
 " non github repos
 " Bundle 'git://git.wincent.com/command-t.git'
 
@@ -89,7 +89,7 @@ let g:vundle_default_git_proto = 'git'
 " ########################################################################
 " vincent's settings
 " ########################################################################
-colorscheme gummybears
+colorscheme badwolf
 " Better copy & paste
 :set pastetoggle=<F2>
 
