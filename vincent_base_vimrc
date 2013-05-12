@@ -221,6 +221,12 @@ noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
 inoremap <C-n> :nohl<CR>
 
+" NERDTree Toggle
+noremap <F3> :NERDTreeToggle<CR>
+inoremap <F3> <ESC>:NERDTreeToggle<CR>
+vnoremap <F3> <ESC>:NERDTreeToggle<CR>
+
+
 " Useful mappings for managing tabs
 map <leader>tn :tabnew<cr>
 map <leader>to :tabonly<cr>
