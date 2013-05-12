@@ -4,7 +4,7 @@
 "       http://xsudo.com wangchao.omg@gmail.com  or vincent@xsudo.com
 "
 " Version: 
-"       2.0.2 - 2013-05-09 22:52:21
+"       2.0.3 - 2013-05-12 22:21:35
 "
 " Sections:
 "    -> vundle
@@ -16,13 +16,16 @@
 "    -> Powerline
 "
 " ChangeLog:
+"		2.0.3	  2013-05-12
+"			* Add NERDTree plugin
 "       2.0.2     2013-05-12
 "			* Add nginx vim ,and add all my old vimrc
 "       2.0.1     2013-05-09
 "           * Adjust this vimrc file format
 "       2.0.0     2013-05-09
 "           * Use vundle management plugin
-"           * Save all vim config files on Dropbox including vimrc and vim folder
+"           * Save all vim config files on Dropbox including vimrc and vim 
+"			  folder
 "           * Save all vim config files on github 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -67,6 +70,8 @@ Bundle 'klen/python-mode'
 Bundle 'mattn/calendar-vim'
 " Nginx vim
 Bundle 'git://github.com/evanmiller/nginx-vim-syntax.git'
+" Nerdtree
+Bundle 'git://github.com/scrooloose/nerdtree.git'
 
 " #######################
 " colorscheme bundle
