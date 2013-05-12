@@ -4,23 +4,27 @@
 "       http://xsudo.com wangchao.omg@gmail.com  or vincent@xsudo.com
 "
 " Version: 
-"       2.0 - 2013-05-09 00:19:46
+"       2.0.2 - 2013-05-09 22:52:21
 "
 " Sections:
-"    -> General
 "    -> vundle
+"    -> General
+"    -> Custom keymap Settings
+"    -> Vimwiki
+"    -> python-mode
+"    -> Ctrlp
+"    -> Powerline
 "
 " ChangeLog:
-"       2.0 - 2013-05-09
+"       2.0.2     2013-05-12
+"			* Add nginx vim ,and add all my old vimrc
+"       2.0.1     2013-05-09
+"           * Adjust this vimrc file format
+"       2.0.0     2013-05-09
 "           * Use vundle management plugin
 "           * Save all vim config files on Dropbox including vimrc and vim folder
 "           * Save all vim config files on github 
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => General
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
@@ -55,11 +59,14 @@ Bundle 'gmarik/vundle'
 Bundle 'vimwiki'
 " Powerline
 Bundle 'git://github.com/Lokaltog/vim-powerline.git'
-
+" CtrlP
+Bundle 'git://github.com/kien/ctrlp.vim.git'
 " python-mode
 Bundle 'klen/python-mode'
 " Calendar-vim
 Bundle 'mattn/calendar-vim'
+" Nginx vim
+Bundle 'git://github.com/evanmiller/nginx-vim-syntax.git'
 
 " #######################
 " colorscheme bundle
@@ -86,18 +93,20 @@ filetype plugin indent on     " required!
 " makes Vundle use `git` instead default `https` when building absolute repo URIs
 let g:vundle_default_git_proto = 'git'
 
-" ########################################################################
-" vincent's settings
-" ########################################################################
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => General
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colorscheme
 colorscheme badwolf
+
 " Better copy & paste
 :set pastetoggle=<F2>
 
+set nu                                  " number line
+set t_Co=256                            " number of colors				
 
-set nu              " number line
-set t_Co=256            " color
-
-set laststatus=2
+set laststatus=2                        " status line
 "set statusline=\ %{HasPaste()}%<%-15.25(%f%)%m%r%h\ %w\ \
 "set statusline+=\ \ \ [%{&ff}/%Y]
 "set statusline+=\ \ \ %<%20.30(%{hostname()}:%{CurDir()}%)\
@@ -116,12 +125,20 @@ set laststatus=2
 "    endif
 "endfunction
 
+" with this you can use p to paste from system, but P will not paste last
+" buffer
+" set clipboard=unnamedplus
+
 filetype plugin on
 
+" The ":syntax enable" command will keep your current color settings.  This
+" allows using ":highlight" commands to set your preferred colors before or
+" after using this command.  If you want Vim to overrule your settings with the
+" defaults, use: > :syntax on
 syntax enable
 syntax on
 
-" allow backspacing over everything in insert mode
+" allow backspacing over everything in insert mode  ,set bs=2  have the same effect 
 set backspace=indent,eol,start
 
 " do not keep a backup file, use versions instead
@@ -129,26 +146,27 @@ set nobackup
 set nowritebackup
 set noswapfile 
 
-set mouse=a
-set history=50      " keep 50 lines of command line history
+" set mouse=a                           " on OSX press alt and click
+set history=700                         " keep 700 lines of command line history
+set undolevels=700                      " undo level
 
-set ruler       " show the cursor position all the time
-set showcmd     " display incomplete commands
+set ruler                               " show the cursor position all the time
+set showcmd                             " display incomplete commands
 
-set autoread        " auto read when file is changed from outside
+set autoread                            " auto read when file is changed from outside
 " ignore these files while expanding wild chars
 set wildignore=*.o,*.class,*.pyc
 
-set autoindent      " auto indentation
+set autoindent                          " auto indentation
+set smartindent							" auto indent for c program
+" set copyindent							" copy last indent
 
-set smarttab        " insert tabs on the start of a line according to context
+set smarttab                            " insert tabs on the start of a line according to context
 
-
-
-set hlsearch              " 开启高亮显示结果
-set incsearch             " do incremental searching
-set ignorecase      " ignore case when searching
-set smartcase       " ignore case if search pattern is all lowercase,case-sensitive otherwise
+set hlsearch                            " 开启高亮显示结果
+set incsearch                           " do incremental searching
+set ignorecase                          " ignore case when searching
+set smartcase                           " ignore case if search pattern is all lowercase,case-sensitive otherwise
 
 " disable sound on errors
 set noerrorbells
@@ -160,47 +178,84 @@ set tm=500
 " swap temp file ,it's no need when you set noswapfile
 set directory=~/tmp,/tmp
 
-" 设置缩进
-set et
-set ts=4
-set sw=4
-"自动切换到当前工作目录
-set autochdir
+" Tab settins TODO: add note
+set tabstop=4                           " 
+set softtabstop=4
+set shiftwidth=4
+set shiftround
 
+" set tw=79
+set colorcolumn=80                      " display a column line
+
+
+" highlight ColorColoumn ctermbg=233
+
+" auto change working directory
+" set autochdir
+
+" auto reload .vimrc
+autocmd! bufwritepost .vimrc so ~/.vimrc
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Custom keymap settins
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" With a map leader it's possible to do extra key combinations
+let mapleader = ","
+let g:mapleader = ","
+
+" Fast saving
+nmap <leader>w :w!<cr>
+
+" Quick quit command
+noremap <Leader>q :quit<CR>                 " Quit current window
+noremap <Leader>Q :qa!<CR>                  " Quit all window
+
+" Removes highlight of your search
+noremap <C-n> :nohl<CR>
+vnoremap <C-n> :nohl<CR>
+inoremap <C-n> :nohl<CR>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <Leader>N  <esc>:tabprevious<CR>
+map <Leader>n  <esc>:tabnext<CR>
+map <Leader>t0  <esc>:tabfirst<CR>
+map <Leader>t$  <esc>:tablast<CR>
+
+" easier moving of code blocks
+vnoremap < <gv " better indentation
+vnoremap > >gv " better indentation
+
+" easier formatting of paragraphs
+vmap Q gq
+nmap Q gqap
 
 "Fast reloading of the .vimrc
 map <silent> <leader>ss :source ~/.vimrc<cr>
 "Fast editing of .vimrc
 map <silent> <leader>ee :e ~/.vimrc<cr>
-" auto reload .vimrc
-" auto reload .vimrc
-autocmd! bufwritepost .vimrc so ~/.vimrc
+
+" use for Vimwiki
+" insert the last update datetime for vimwiki
+noremap <C-I>d  <Esc>1ggO<Esc>d0i<span class="author">王超</span>最后修改:<span class="update_date"><C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR></span>
+" insert the title tag for vimwiki
+noremap <C-I>t  <Esc>Go<Esc>d0i%title t - 王超.wiki<Esc>10hs
+" insert a code block for language highlight of Vimwiki
+noremap <C-I>c  <Esc>o{{{class="brush:bash;class-name:'code_class_highlighter'"<cr><cr>}}}<Esc>ki
+
+" quick insert datetime, date and time
+noremap <Leader>d1 <Esc>a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
+noremap <Leader>d2 <Esc>a<C-R>=strftime("%Y-%m-%d")<CR>
+noremap <Leader>d3 <Esc>a<C-R>=strftime("%H:%M:%S")<CR>
 
 
-" powerline{
-set guifont=PowerlineSymbols\ for\ Powerline
-let g:Powerline_symbols='fancy'         "'fancy'
-set fillchars+=stl:\ ,stlnc:\
-"}
-
-
-" ########################################################################
-" some useful keymap for wiki and datetime
-" ########################################################################
-" 插入最后修改的时间
-map <C-I>d  <Esc>1ggO<Esc>d0i<span class="author">王超</span>最后修改:<span class="update_date"><C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR></span>
-" 在底部插入页面标题
-map <C-I>t  <Esc>Go<Esc>d0i%title t - 王超.wiki<Esc>10hs
-" 在当前位置插入一段高亮代码块的代码
-map <C-I>c  <Esc>o{{{class="brush:bash;class-name:'code_class_highlighter'"<cr><cr>}}}<Esc>ki
-" 插入日期的3种格式
-map <Leader>d1 <Esc>a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
-map <Leader>d2 <Esc>a<C-R>=strftime("%Y-%m-%d")<CR>
-map <Leader>d3 <Esc>a<C-R>=strftime("%H:%M:%S")<CR>
-
-" ########################################################################
-" vimwiki的配置
-" ########################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vimwiki
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimwiki_list=[{'path': '$HOME/Dropbox/dev/workspace/vimwiki/01/wiki/',
     \'path_html':'$HOME/Dropbox/dev/workspace/vimwiki/01/html/',
     \ 'template_path': '$HOME/Dropbox/dev/workspace/vimwiki/01/templates/',
@@ -226,9 +281,9 @@ map <F4> :Vimwiki2HTML<cr>
 map <F8> :Calendar<cr>          "打开日历
 
 
-" ########################################################################
-" python-mode
-" ########################################################################
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => python-mode
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Load the whole plugin
 " let g:pymode = 1
 " Load show documentation plugin
@@ -236,7 +291,7 @@ let g:pymode_doc = 1
 " Key for show python documentation
 let g:pymode_doc_key = 'K'
 " Enable python folding
-let g:pymode_folding = 0
+let g:pymode_folding = 1
 let g:pymode_lint = 1
 
 
@@ -279,3 +334,34 @@ let g:pymode_syntax_highlight_exceptions = g:pymode_syntax_all
 
 " For fast machines
 let g:pymode_syntax_slow_sync = 0
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => CtrlP
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CtrP keymap and command
+let g:ctrlp_map = '<c-p>'
+let g:ctrlp_cmd = 'CtrlP'
+" CtrlP work path mode
+" 'c' - the directory of the current file.
+" 'r' - the nearest ancestor that contains one of these directories or files:
+" .git .hg .svn .bzr _darcs
+" 'a' - like c, but only if the current working directory outside of CtrlP is
+" not a direct ancestor of the directory of the current file.
+" 0 or '' (empty string) - disable this feature.
+let g:ctrlp_working_path_mode = '0'
+set wildignore+=*/tmp/*,*.so,*.swp
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/]\.(git|hg|svn)$',
+  \ 'file': '\v\.(exe|so|dll|~|pyc|class)$',
+  \ 'link': 'some_bad_symbolic_links',
+  \ }
+" line height
+let g:ctrlp_max_height=20
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Powerline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set guifont=PowerlineSymbols\ for\ Powerline
+let g:Powerline_symbols='fancy'         "'fancy'
+set fillchars+=stl:\ ,stlnc:\
