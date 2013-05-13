@@ -43,3 +43,9 @@
 [submodule "vim/bundle/nerdtree"]
 	path = vim/bundle/nerdtree
 	url = git://github.com/scrooloose/nerdtree.git
+[submodule "vim/bundle/surround.vim"]
+	path = vim/bundle/surround.vim
+	url = git://github.com/vim-scripts/surround.vim.git
+[submodule "vim/bundle/ZenCoding.vim"]
+	path = vim/bundle/ZenCoding.vim
+	url = git://github.com/vim-scripts/ZenCoding.vim.git

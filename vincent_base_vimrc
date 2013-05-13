@@ -72,6 +72,10 @@ Bundle 'mattn/calendar-vim'
 Bundle 'git://github.com/evanmiller/nginx-vim-syntax.git'
 " Nerdtree
 Bundle 'git://github.com/scrooloose/nerdtree.git'
+" surround
+Bundle 'surround.vim'
+" ZenCoding
+Bundle 'ZenCoding.vim'
 
 " #######################
 " colorscheme bundle
@@ -105,8 +109,6 @@ let g:vundle_default_git_proto = 'git'
 " colorscheme
 colorscheme badwolf
 
-" Better copy & paste
-:set pastetoggle=<F2>
 
 set nu                                  " number line
 set t_Co=256                            " number of colors				
@@ -263,6 +265,8 @@ noremap <Leader>d1 <Esc>a<C-R>=strftime("%Y-%m-%d %H:%M:%S")<CR>
 noremap <Leader>d2 <Esc>a<C-R>=strftime("%Y-%m-%d")<CR>
 noremap <Leader>d3 <Esc>a<C-R>=strftime("%H:%M:%S")<CR>
 
+" Better copy & paste
+:set pastetoggle=<F2>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vimwiki
