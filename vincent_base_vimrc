@@ -4,7 +4,7 @@
 "       http://xsudo.com wangchao.omg@gmail.com  or vincent@xsudo.com
 "
 " Version: 
-"       2.0.3 - 2013-05-12 22:21:35
+"       2.0.4 - 2013-05-12 22:21:35
 "
 " Sections:
 "    -> vundle
@@ -16,6 +16,10 @@
 "    -> Powerline
 "
 " ChangeLog:
+"		2.0.4	  2013-05-13
+"			* Add plugin zencoding
+"			* Add plugin surround 
+"			* Add plugin SnipMate and dependencies 
 "		2.0.3	  2013-05-12
 "			* Add NERDTree plugin
 "       2.0.2     2013-05-12
@@ -76,6 +80,12 @@ Bundle 'git://github.com/scrooloose/nerdtree.git'
 Bundle 'surround.vim'
 " ZenCoding
 Bundle 'ZenCoding.vim'
+" dependencies for SnipMate
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "honza/vim-snippets"
+" Snipmate
+Bundle "garbas/vim-snipmate"
 
 " #######################
 " colorscheme bundle
