@@ -16,6 +16,8 @@
 "    -> Powerline
 "
 " ChangeLog:
+"		2.0.5	  2013-05-15
+"			* Add plugin taglist
 "		2.0.4	  2013-05-13
 "			* Add plugin zencoding
 "			* Add plugin surround 
@@ -280,6 +282,10 @@ noremap <Leader>d3 <Esc>a<C-R>=strftime("%H:%M:%S")<CR>
 " Better copy & paste
 :set pastetoggle=<F2>
 
+" taglist toggle
+map <silent> <F9> :TlistToggle<cr>
+
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vimwiki
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -398,3 +404,13 @@ set fillchars+=stl:\ ,stlnc:\
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " custom ignore 
 let NERDTreeIgnore = ['\.pyc$','\.class$','\.so$','\.dll$']
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => taglist settings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" TagList                                  
+set tags=tags;                             
+let Tlist_Ctags_Cmd="/usr/local/bin/ctags" 
+let Tlist_Auto_Open=1                      
+let Tlist_Use_Right_Window = 1             
