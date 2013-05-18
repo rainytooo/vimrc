@@ -4,7 +4,7 @@
 "       http://xsudo.com wangchao.omg@gmail.com  or vincent@xsudo.com
 "
 " Version: 
-"       2.0.4 - 2013-05-12 22:21:35
+"       2.0.6 - 2013-05-18 13:59:05
 "
 " Sections:
 "    -> vundle
@@ -16,6 +16,8 @@
 "    -> Powerline
 "
 " ChangeLog:
+"		2.0.6	  2013-05-16
+"			* fix a CtrlP config error, fix some key conflict
 "		2.0.5	  2013-05-15
 "			* Add plugin taglist
 "		2.0.4	  2013-05-13
@@ -217,6 +219,8 @@ set autochdir
 " auto reload .vimrc
 autocmd! bufwritepost .vimrc so ~/.vimrc
 
+" dictionary completion
+:set dictionary=/usr/share/dict/words
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Custom keymap settins
@@ -235,7 +239,7 @@ noremap <Leader>Q :qa!<CR>                  " Quit all window
 " Removes highlight of your search
 noremap <C-n> :nohl<CR>
 vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+" inoremap <C-n> :nohl<CR> " conflict with word completion
 
 " NERDTree Toggle
 noremap <F3> :NERDTreeToggle<CR>
@@ -382,11 +386,11 @@ let g:ctrlp_cmd = 'CtrlP'
 " 'a' - like c, but only if the current working directory outside of CtrlP is
 " not a direct ancestor of the directory of the current file.
 " 0 or '' (empty string) - disable this feature.
-let g:ctrlp_working_path_mode = '0'
+let g:ctrlp_working_path_mode = 'a'
 set wildignore+=*/tmp/*,*.so,*.swp
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll|~|pyc|class)$',
+  \ 'file': '\v\.(exe|so|dll|pyc|class)$',
   \ 'link': 'some_bad_symbolic_links',
   \ }
 " line height
