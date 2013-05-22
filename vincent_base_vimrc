@@ -4,7 +4,7 @@
 "       http://xsudo.com wangchao.omg@gmail.com  or vincent@xsudo.com
 "
 " Version: 
-"       2.0.6 - 2013-05-18 13:59:05
+"       2.0.7 - 2013-05-21 22:12:28
 "
 " Sections:
 "    -> vundle
@@ -14,8 +14,12 @@
 "    -> python-mode
 "    -> Ctrlp
 "    -> Powerline
+"    -> NERDTree
+"    -> Taglist
 "
 " ChangeLog:
+"		2.0.7	  2013-05-21
+"			* auto set filetype for *.tpl and *.rss file
 "		2.0.6	  2013-05-16
 "			* fix a CtrlP config error, fix some key conflict
 "		2.0.5	  2013-05-15
@@ -92,6 +96,8 @@ Bundle "honza/vim-snippets"
 Bundle "garbas/vim-snipmate"
 " Taglist
 Bundle "taglist.vim"
+" unimpaired.vim
+Bundle "git://github.com/tpope/vim-unimpaired.git"
 
 " #######################
 " colorscheme bundle
@@ -101,7 +107,6 @@ Bundle 'burnttoast256'
 Bundle 'Skittles-Berry'
 Bundle 'badwolf'
 Bundle 'Gummybears'
-
 " ...
 
 filetype plugin indent on     " required!
@@ -184,7 +189,6 @@ set autoindent                          " auto indentation
 set smartindent							" auto indent for c program
 " set copyindent							" copy last indent
 
-set smarttab                            " insert tabs on the start of a line according to context
 
 set hlsearch                            " 开启高亮显示结果
 set incsearch                           " do incremental searching
@@ -201,7 +205,8 @@ set tm=500
 " swap temp file ,it's no need when you set noswapfile
 set directory=~/tmp,/tmp
 
-" Tab settins TODO: add note
+" Tab settins
+set smarttab                            " insert tabs on the start of a line according to context
 set tabstop=4                           " 
 set softtabstop=4
 set shiftwidth=4
@@ -220,7 +225,27 @@ set autochdir
 autocmd! bufwritepost .vimrc so ~/.vimrc
 
 " dictionary completion
-:set dictionary=/usr/share/dict/words
+set dictionary=/usr/share/dict/words
+
+" listchar
+set listchars=tab:▸\ ,eol:¬
+" set list
+
+
+" Syntax of these languages is fussy over tabs Vs spaces
+autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+
+" Customisations based on house-style (arbitrary)
+autocmd FileType html setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType css setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType javascript setlocal ts=4 sts=4 sw=4 noexpandtab
+
+" Treat .rss files as XML
+autocmd BufNewFile,BufRead *.rss setfiletype xml
+" Treat tpl files as HTML
+autocmd BufNewFile,BufRead *.tpl if &ft == 'smarty' | set ft=html
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Custom keymap settins
@@ -260,6 +285,13 @@ map <Leader>t$  <esc>:tablast<CR>
 " easier moving of code blocks
 vnoremap < <gv " better indentation
 vnoremap > >gv " better indentation
+" just on osx, conflict with osx origin terminal
+" nmap <D-[> <<
+" nmap <D-]> >>
+" vmap <D-[> <gv
+" vmap <D-]> >gv
+
+
 
 " easier formatting of paragraphs
 vmap Q gq
