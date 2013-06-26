@@ -98,6 +98,8 @@ Bundle "garbas/vim-snipmate"
 Bundle "taglist.vim"
 " unimpaired.vim
 Bundle "git://github.com/tpope/vim-unimpaired.git"
+" php
+Bundle "php.vim"
 
 " #######################
 " colorscheme bundle
