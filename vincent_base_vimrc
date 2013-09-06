@@ -100,6 +100,8 @@ Bundle "taglist.vim"
 Bundle "git://github.com/tpope/vim-unimpaired.git"
 " php
 Bundle "php.vim"
+" vdebug
+Bundle 'joonty/vdebug.git'
 
 " #######################
 " colorscheme bundle
