@@ -81,36 +81,42 @@ Bundle 'klen/python-mode'
 " Calendar-vim
 Bundle 'mattn/calendar-vim'
 " Nginx vim
-Bundle 'git://github.com/evanmiller/nginx-vim-syntax.git'
+" Bundle 'git://github.com/evanmiller/nginx-vim-syntax.git'
 " Nerdtree
 Bundle 'git://github.com/scrooloose/nerdtree.git'
 " surround
-Bundle 'surround.vim'
+" Bundle 'surround.vim'
 " ZenCoding
-Bundle 'ZenCoding.vim'
+" Bundle 'ZenCoding.vim'
 " dependencies for SnipMate
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
+" Bundle "MarcWeber/vim-addon-mw-utils"
+" Bundle "tomtom/tlib_vim"
 Bundle "honza/vim-snippets"
 " Snipmate
-Bundle "garbas/vim-snipmate"
+" Bundle "garbas/vim-snipmate"
+" UltiSnips
+Plugin 'SirVer/ultisnips'
 " Taglist
 Bundle "taglist.vim"
 " unimpaired.vim
-Bundle "git://github.com/tpope/vim-unimpaired.git"
+" Bundle "git://github.com/tpope/vim-unimpaired.git"
 " php
-Bundle "php.vim"
+" Bundle "php.vim"
 " vdebug
-Bundle 'joonty/vdebug.git'
+" Bundle 'joonty/vdebug.git'
+" riv.vim for reStructuredText
+Bundle 'Rykka/riv.vim'
+" use python virtualenv
+Bundle 'jmcantrell/vim-virtualenv'
 
 " #######################
 " colorscheme bundle
 " #######################
-Bundle 'desert-warm-256'
-Bundle 'burnttoast256'
-Bundle 'Skittles-Berry'
+" Bundle 'desert-warm-256'
+" Bundle 'burnttoast256'
+" Bundle 'Skittles-Berry'
 Bundle 'badwolf'
-Bundle 'Gummybears'
+" Bundle 'Gummybears'
 " ...
 
 filetype plugin indent on     " required!
@@ -329,9 +335,9 @@ map <silent> <F9> :TlistToggle<cr>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => Vimwiki
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vimwiki_list=[{'path': '$HOME/Dropbox/dev/workspace/vimwiki/01/wiki/',
-    \'path_html':'$HOME/Dropbox/dev/workspace/vimwiki/01/html/',
-    \ 'template_path': '$HOME/Dropbox/dev/workspace/vimwiki/01/templates/',
+let g:vimwiki_list=[{'path': '$HOME/360pan/docs/vim/vimwiki/01/wiki/',
+    \'path_html':'$HOME/360pan/docs/vim/vimwiki/01/html/',
+    \ 'template_path': '$HOME/360pan/docs/vim/vimwiki/01/templates/',
     \ 'template_default': 'def_template',
     \ 'template_ext': '.html',
     \ 'diary_link_count': '4',
@@ -454,3 +460,55 @@ set tags=tags;
 let Tlist_Ctags_Cmd="/usr/local/bin/ctags" 
 let Tlist_Auto_Open=1                      
 let Tlist_Use_Right_Window = 1             
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => UltiSnips
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:UltiSnipsSnippetDirectories=['UltiSnips']
+let g:UltiSnipsSnippetsDir = "~/.vim/bundle/vim-snippets/UltiSnips"
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => for django project 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Sets up omni-completion for a django project in a virtualenv.
+" "
+" " Copy this file to YOUR_VIRTUALENV_DIR/.vimrc and add the following to your
+" " ~/.vimrc file:
+" "     if filereadable($VIRTUAL_ENV . '/.vimrc')
+" "         source $VIRTUAL_ENV/.vimrc
+" "     endif
+" "
+" " Thanks, Daniel!
+" "
+" http://blog.roseman.org.uk/2010/04/21/vim-autocomplete-django-and-virtualenv/
+"
+" py << EOF
+" import os.path
+" import sys
+" import vim
+"
+" # SET THIS MANUALLY
+" # =================
+" DJANGO_SETTINGS_MODULE='foo.settings'
+"
+" project_base_dir = os.environ['VIRTUAL_ENV']
+"
+" sys.path.insert(0, project_base_dir)
+"
+" activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+" execfile(activate_this, dict(__file__=activate_this))
+"
+" os.environ['DJANGO_SETTINGS_MODULE'] = DJANGO_SETTINGS_MODULE
+" EOF
+if filereadable($VIRTUAL_ENV . '/.vimrc')
+	source $VIRTUAL_ENV/.vimrc
+endif
